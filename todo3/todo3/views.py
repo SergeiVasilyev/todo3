@@ -24,9 +24,9 @@ def index(request):
       'form': form,
       'alltodos': todos
    }
-   return render(request, 'todo2/index.html', context)
-   #return render(request, 'todo2/index.html', {'form': form, 'alltodos': todos})
-   #return render(request, 'todo2/index.html', {'alltodos': todos})
+   return render(request, 'todo3/index.html', context)
+   #return render(request, 'todo3/index.html', {'form': form, 'alltodos': todos})
+   #return render(request, 'todo3/index.html', {'alltodos': todos})
 
 def remove_item(request, id):
    item = Todolist.objects.get(id=id)

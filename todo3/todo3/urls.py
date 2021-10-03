@@ -1,4 +1,4 @@
-"""todo2 URL Configuration
+"""todo3 URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
@@ -18,7 +18,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 
-from todo2 import views
+from todo3 import views
 
 urlpatterns = [
     path('', views.index, name='home'),

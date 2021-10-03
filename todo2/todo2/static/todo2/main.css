@@ -1,0 +1,28 @@
+article {
+    min-width: 700px;
+}
+
+.container-my {
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+form {
+    margin-top: 3em;
+    margin-bottom: 3em;
+}
+
+.list_warp ul li:nth-child(odd) {
+    background: #f3f3f3;
+}
+
+sup {
+    font-size: 0.5em;
+    font-weight: 100;
+    color: #b1b1b1;
+}
+
+/* .col-auto {
+    border: 1px red solid;
+} */

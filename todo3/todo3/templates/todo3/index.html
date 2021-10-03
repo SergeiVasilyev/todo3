@@ -15,7 +15,8 @@
         <h1 class="display-1">Todo<sup>app</sup></h1>
 
         <form method="post">
-            <div class="row justify-content-md-center">
+            <!-- <div class="row justify-content-md-center"> -->
+            <div class="row">
                 {% csrf_token %}
                 <div class="col-auto ">
                     {{ form.todoitem }}

@@ -1,17 +1,19 @@
 article {
-    min-width: 700px;
+    max-width: 720px;
 }
 
 .container-my {
     max-width: 720px;
     margin-left: auto;
     margin-right: auto;
+    padding: 0.6em;
 }
 
 form {
     margin-top: 3em;
     margin-bottom: 3em;
 }
+
 
 .list_warp ul li:nth-child(odd) {
     background: #f3f3f3;

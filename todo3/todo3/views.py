@@ -44,6 +44,18 @@ def favorite_item(request, idx):
    item.save()
    return redirect('home')
 
+def done_item(request, idx):
+   item = Todolist.objects.get(id=idx)
+   if not item.todoitem_done:
+      item.todoitem_done = True
+   else:
+      item.todoitem_done = False
+   item.save()
+   return redirect('home')
+
+
+
+
 
 
 # def chek_fav(args):

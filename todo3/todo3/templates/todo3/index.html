@@ -16,9 +16,9 @@
 
         <form method="post">
             <!-- <div class="row justify-content-md-center"> -->
-            <div class="row">
+            <div class="row row_my">
                 {% csrf_token %}
-                <div class="col-auto ">
+                <div class="col-auto_my">
                     {{ form.todoitem }}
                 </div>
                 <div class="col-auto">
@@ -32,11 +32,16 @@
             {% if alltodos %}
             <ul class="list-group">
                 {% for el in alltodos %}
-                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action list-group-item-light">{{el.todoitem}}
-                        <!-- <span class="badge bg-primary rounded-pill">14</span> -->
-                        <!-- <button type="button" class="btn btn-outline-secondary" name="{{el.id}}">X</button> -->
-                        <a href="{% url 'remove_item' el.id %}"><button class="btn btn-outline-secondary">Poistaa</button></a>
+                  <a href="{% url 'favorite_item' el.id %}" class="list_link">
+                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action {{ el.item_class }}">
+                      {{el.todoitem}}
+                      <div>
+                        <a href="{% url 'remove_item' el.id %}"><button class="btn btn-outline-success">Done</button></a>
+                        <a href="{% url 'remove_item' el.id %}"><button class="btn btn-outline-secondary">Edit</button></a>
+                        <a href="{% url 'remove_item' el.id %}"><button class="btn btn-outline-danger">Poistaa</button></a>
+                      </div>
                     </li>
+                  </a>
                 {% endfor %}
             </ul>
         </div>
@@ -47,7 +52,7 @@
                 </li>
             </ul>
         {% endif %}
-    
+        
         <!-- <form class="row gy-2 gx-3 align-items-center">
             <div class="col-auto">
               <label class="visually-hidden" for="autoSizingInput">Name</label>

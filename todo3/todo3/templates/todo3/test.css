@@ -1,0 +1,39 @@
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+form {
+    margin-top: 3em;
+    margin-bottom: 3em;
+    max-width: 700px;
+    border: 1px red solid;
+}
+.col-auto{
+    border: 1px yellow solid;
+    
+}
+button {
+    background: #dadada;
+    border: 0;
+    border-right: 1px solid #cbcbcc;
+    display: block;
+    float: right;
+    height: 52px;
+    width: 52px;
+}
+
+.wide {
+    overflow: hidden;
+    border: 1px green solid;
+    flex: 2 1 200px;
+  }
+  .search-input {
+    border: 1px solid #dadada;
+    display: block;
+    height: 52px;
+    padding: 10px 30px;
+    width: 100%;
+    
+  }

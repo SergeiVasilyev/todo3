@@ -1,0 +1,41 @@
+article {
+    max-width: 720px;
+}
+
+.container-my {
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0.6em;
+}
+
+form {
+    margin-top: 3em;
+    margin-bottom: 3em;
+    max-width: 700px;
+    border: 1px red solid;
+}
+
+
+.col-auto {
+    border: 1px green solid;
+    width: 50%;
+}
+
+/* .form-control {
+    width: 100%;
+} */
+
+.list_warp ul li:nth-child(odd) {
+    background: #f3f3f3;
+}
+
+sup {
+    font-size: 0.5em;
+    font-weight: 100;
+    color: #b1b1b1;
+}
+
+/* .col-auto {
+    border: 1px red solid;
+} */

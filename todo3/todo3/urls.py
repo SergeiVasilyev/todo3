@@ -23,5 +23,6 @@ from todo3 import views
 urlpatterns = [
     path('', views.index, name='home'),
     path('admin/', admin.site.urls),
-    path('remove_item/<int:id>/', views.remove_item, name='remove_item'),
+    path('remove_item/<int:idx>/', views.remove_item, name='remove_item'),
+    path('favorite_item/<int:idx>/', views.favorite_item, name='favorite_item'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

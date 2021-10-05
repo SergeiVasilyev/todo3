@@ -1,12 +1,21 @@
+body {
+    background-color: #f5f5f5;
+}
+
 article {
     max-width: 720px;
+    background-color: #ffffff;
+}
+
+h1 {
+    margin-bottom: 0.5em;
 }
 
 .container-my {
-    max-width: 720px;
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
-    padding: 0.6em;
+    padding: 1em;
 }
 
 .row_my {
@@ -25,9 +34,15 @@ article {
     /*background: #e78383;*/
 }
 
-.list-group-item-strikethrough {
-    text-decoration: underline;
+li {
+    font-size: 1.1em;
     
+}
+
+.list-group-item-strikethrough {
+    /* text-decoration: underline; */
+    background-color: #eeeeee;
+    color: #dbdbdb;
 }
 
 sup {
@@ -39,4 +54,10 @@ sup {
 a:link, a:visited, a {
     text-decoration: none;
     color: inherit;
+    
 }
+
+/* .list_link {
+    display:flex;
+    border: 1px red solid;
+} */

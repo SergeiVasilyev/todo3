@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_exempt
 
 from .forms import TodolistForm
 from .models import Todolist
@@ -53,7 +54,15 @@ def done_item(request, idx):
    item.save()
    return redirect('home')
 
-
+@csrf_exempt
+def mark_item(request, idx):
+   item = Todolist.objects.get(id=idx)
+   if not item.todoitem_fav:
+      item.todoitem_fav = True
+   else:
+      item.todoitem_fav = False
+   item.save()
+   return item.todoitem_fav
 
 
 

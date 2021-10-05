@@ -26,4 +26,5 @@ urlpatterns = [
     path('remove_item/<int:idx>/', views.remove_item, name='remove_item'),
     path('favorite_item/<int:idx>/', views.favorite_item, name='favorite_item'),
     path('done_item/<int:idx>/', views.done_item, name='done_item'),
+    path('mark_item/<int:idx>/', views.mark_item, name='mark_item'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

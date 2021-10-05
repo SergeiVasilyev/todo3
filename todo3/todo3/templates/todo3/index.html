@@ -7,7 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'todo3/main.css' %}">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <title>Todo app</title>
+    
+    <script>
+      function myFunction(url, idx) {
+        alert(url+'mark_item/'+idx+'/');
+        $(idx).addClass("list-group-item-success"); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        $.post('mark_item/'+idx+'/', function (data, status) {
+            alert(url);
+            $(this).addClass("list-group-item-success");
+
+        });
+      }
+    </script>
 </head>
 <!-- <body class="d-flex justify-content-center"> -->
 <body>
@@ -29,14 +42,14 @@
         </form>
 
         <div class="list_warp">
-            {% if alltodos %}
+          {% if alltodos %}
             <ul class="list-group">
                 {% for el in alltodos %}
                   <a href="{% url 'favorite_item' el.id %}" class="list_link">
-                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action {{ el.item_class }}">
+                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action {{ el.item_class }}" onclick="myFunction(location.href, {{el.id}})" id="{{el.id}}">
                       {{el.todoitem}}
                       <div>
-                        <a href="{% url 'done_item' el.id %}"><button class="btn btn-outline-success">Done</button></a>
+                        <a href="{% url 'done_item' el.id %}"><button class="btn btn-outline-success">✓</button></a>
                         <a href="{% url 'remove_item' el.id %}"><button class="btn btn-outline-secondary">Edit</button></a>
                         <a href="{% url 'remove_item' el.id %}"><button class="btn btn-outline-danger">Poistaa</button></a>
                       </div>
@@ -44,8 +57,9 @@
                   </a>
                 {% endfor %}
             </ul>
+          {% else %}
         </div>
-        {% else %}
+        
             <ul class="list-group">
                 <li class="list-group-item p-3">
                     Ei ole tehhtäviä    
@@ -89,3 +103,4 @@
     </article>
 </body>
 </html>
+

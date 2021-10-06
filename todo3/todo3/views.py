@@ -1,5 +1,8 @@
+from django.http import response
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import HttpResponse
+
 
 from .forms import TodolistForm
 from .models import Todolist
@@ -59,12 +62,26 @@ def mark_item(request, idx):
    item = Todolist.objects.get(id=idx)
    if not item.todoitem_fav:
       item.todoitem_fav = True
+      res = 'list-group-item-success'
    else:
       item.todoitem_fav = False
+      res = 'list-group-item-light'
    item.save()
-   return item.todoitem_fav
+   #print(item.todoitem_fav)
+   return HttpResponse(res)
 
-
+def update_item (request, idx):
+   print('idx ', idx)
+   item = Todolist.objects.get(id=idx)
+   print('item ', item.todoitem)
+   form = TodolistForm(request.POST)
+   if form.is_valid():
+      print('REQUEST:: ', form.cleaned_data['todoitem'])
+      el_todoitem = form.cleaned_data['todoitem']
+      # rec = Todolist(todoitem=el_todoitem, todoitem_fav=item.todoitem_fav, todoitem_done=item.todoitem_done)
+      item.todoitem = el_todoitem
+      item.save()
+   return redirect('home')
 
 
 # def chek_fav(args):

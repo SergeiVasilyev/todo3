@@ -57,6 +57,14 @@ a:link, a:visited, a {
     
 }
 
+.block_edit {
+    padding-top: 0.35em;
+    min-width: 100%;
+    height: 50px;
+    border: 1px #dbdbdb solid;
+}
+
+
 /* .list_link {
     display:flex;
     border: 1px red solid;

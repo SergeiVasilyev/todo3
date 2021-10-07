@@ -64,6 +64,9 @@ a:link, a:visited, a {
     border: 1px #dbdbdb solid;
 }
 
+.edit_row {
+    padding-right: 1em;
+}
 
 /* .list_link {
     display:flex;

@@ -69,7 +69,7 @@
                     </li>
                     <div class="block_edit" id="block_edit_{{el.id}}" style="display: none;">
                       <form method="post" action="{% url 'update_item' el.id %}">
-                        <div class="row row_my">
+                        <div class="row row_my edit_row">
                             {% csrf_token %}
                             <div class="col-auto_my">
                                 {{ form.todoitem }}
@@ -85,12 +85,11 @@
             </ul>
           {% else %}
         </div>
-        
-            <ul class="list-group">
-                <li class="list-group-item p-3">
-                    Ei ole tehhtäviä    
-                </li>
-            </ul>
+        <ul class="list-group">
+            <li class="list-group-item p-3">
+                Ei ole tehhtäviä    
+            </li>
+        </ul>
         {% endif %}
         
         <!-- <form class="row gy-2 gx-3 align-items-center">

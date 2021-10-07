@@ -27,12 +27,15 @@
       $('.edit_btn').click(function(){
         console.log('CLICK A ' + $(this).attr("id_a"))
         var idx = $(this).attr("id_a")
-        $('#block_edit_'+idx).toggle("slow")
-
+        console.log($('#' + idx).hasClass("list-group-item-strikethrough"))
+        if (!$('#' + idx).hasClass("list-group-item-strikethrough")){
+          $('#block_edit_'+idx).toggle("slow")
+        }
         //block_edit_{{el.id}}
       })
       
       // Добавить обработку нажатия кнопку ВЫПОЛНЕНО в DJANGO, не в javascript
+      // Плюс сдеалть серыми остальные кнопки, при нажатии на кнопку СДЕЛАНО
     })
   </script>
 </head>
@@ -49,7 +52,7 @@
                     {{ form.todoitem }}
                 </div>
                 <div class="col-auto">
-                    <button type="submit" class="btn btn-success mb-4 px-4">Lisätä</button>
+                    <button type="submit" class="btn btn-success mb-4 px-4">Submit</button>
                 </div>
             </div>
             <span>{{ error }}</span>
@@ -62,9 +65,9 @@
                     <li id="{{el.id}}" class="list-group-item d-flex justify-content-between align-items-center  {{ el.item_class }}" >
                       {{el.todoitem}}
                       <div>
-                        <a href="{% url 'done_item' el.id %}"><button class="btn btn-outline-success">✓</button></a>
+                        <a href="{% url 'done_item' el.id %}"><button class="btn {{ el.btn_done_class }}">✓</button></a>
                         <a href="#" class="edit_btn" id_a="{{el.id}}"><button class="btn btn-outline-secondary">Edit</button></a>
-                        <a href="{% url 'remove_item' el.id %}"><button class="btn btn-outline-danger">Poistaa</button></a>
+                        <a href="{% url 'remove_item' el.id %}"><button class="btn btn-outline-danger">Delete</button></a>
                       </div>
                     </li>
                     <div class="block_edit" id="block_edit_{{el.id}}" style="display: none;">
@@ -75,7 +78,7 @@
                                 {{ form.todoitem }}
                             </div>
                             <div class="col-auto">
-                                <button type="submit" class="btn btn-success mb-4 px-4">Lisätä</button>
+                                <button type="submit" class="btn btn-success mb-4 px-4">Update</button>
                             </div>
                         </div>
                         <span>{{ error }}</span>

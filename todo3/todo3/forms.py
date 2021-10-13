@@ -10,7 +10,7 @@ class TodolistForm(ModelForm):
         widgets = {
             'todoitem': TextInput(attrs={
                 'class': 'form-control mb-2',
-                'placeholder': 'Syötä tehtävä'
+                'placeholder': 'enter text'
             }),
             'todoitem_fav': CheckboxInput(attrs={
                 'class': 'form-check-input mb-2'

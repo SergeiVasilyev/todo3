@@ -83,6 +83,20 @@ def update_item (request, idx):
       item.save()
    return redirect('home')
 
+def testbase (request):
+   error = ''
+   if request.method == 'POST':
+      form = TodolistForm(request.POST)
+      if form.is_valid():
+         print('REQUEST:: ', form.base_fields)
+         form.save()
+         return redirect('home')
+      else:
+         error = 'ERROR'
+   form = TodolistForm()
+   return render(request, 'todo3/test2.html', {'form': form}) 
+
+
 
 # def chek_fav(args):
 #    class_highlight = {'true': 'list-group-item-light', 'false': 'list-group-item-warning'}

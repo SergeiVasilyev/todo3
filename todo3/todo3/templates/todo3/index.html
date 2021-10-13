@@ -8,127 +8,53 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="{% static 'todo3/main.css' %}">
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="{% static 'todo3/main.js' %}"></script>
   <title>Todo app</title>
-  <script>
-    $(document).ready(function() {
-      document.querySelector('.list-group').onclick = function (event) {
-        //console.log($(event.target).attr("id"));
-        //console.log(event.target);
-        var idx = $(event.target).attr("id");
-        if(!$(event.target).hasClass('list-group-item-strikethrough') && $(event.target).is('li')){
-          $.post('mark_item/'+idx+'/', function (data, status) {
-            console.log('data ' + data);
-            //console.log($('#' + idx).attr('class'));
-            $('#' + idx).toggleClass('list-group-item-success list-group-item-light');
-          });
-        };
-      }
-
-      $('.edit_btn').click(function(){
-        console.log('CLICK A ' + $(this).attr("id_a"))
-        var idx = $(this).attr("id_a")
-        console.log($('#' + idx).hasClass("list-group-item-strikethrough"))
-        if (!$('#' + idx).hasClass("list-group-item-strikethrough")){
-          $('#block_edit_'+idx).toggle("slow")
-        }
-        //block_edit_{{el.id}}
-      })
-      
-      // Добавить обработку нажатия кнопку ВЫПОЛНЕНО в DJANGO, не в javascript
-      // Плюс сдеалть серыми остальные кнопки, при нажатии на кнопку СДЕЛАНО
-    })
-  </script>
 </head>
-<!-- <body class="d-flex justify-content-center"> -->
 <body>
-    <article class="container-my">
-        <h1 class="display-1">Todo<sup>app</sup></h1>
-
-        <form method="post">
-            <!-- <div class="row justify-content-md-center"> -->
-            <div class="row row_my">
-                {% csrf_token %}
-                <div class="col-auto_my">
-                    {{ form.todoitem }}
-                </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-success mb-4 px-4">Submit</button>
-                </div>
-            </div>
-            <span>{{ error }}</span>
-        </form>
-
-        <div class="list_warp">
-          {% if alltodos %}
-            <ul class="list-group">
-                {% for el in alltodos %}
-                    <li id="{{el.id}}" class="list-group-item d-flex justify-content-between align-items-center  {{ el.item_class }}" >
-                      {{el.todoitem}}
-                      <div>
-                        <a href="{% url 'done_item' el.id %}"><button class="btn {{ el.btn_done_class }}">✓</button></a>
-                        <a href="#" class="edit_btn" id_a="{{el.id}}"><button class="btn btn-outline-secondary">Edit</button></a>
-                        <a href="{% url 'remove_item' el.id %}"><button class="btn btn-outline-danger">Delete</button></a>
-                      </div>
-                    </li>
-                    <div class="block_edit" id="block_edit_{{el.id}}" style="display: none;">
-                      <form method="post" action="{% url 'update_item' el.id %}">
-                        <div class="row row_my edit_row">
-                            {% csrf_token %}
-                            <div class="col-auto_my">
-                                {{ form.todoitem }}
-                            </div>
-                            <div class="col-auto">
-                                <button type="submit" class="btn btn-success mb-4 px-4">Update</button>
-                            </div>
-                        </div>
-                        <span>{{ error }}</span>
-                      </form>
-                    </div>
-                {% endfor %}
-            </ul>
-          {% else %}
-        </div>
+  <article class="container-my">
+    <h1 class="display-1">Todo<sup>app</sup></h1>
+    <!-- Загрузка формы -->
+    {% include "todo3/form_temp.html" %}
+      
+    <div class="list_warp">
+      {% if alltodos %}
         <ul class="list-group">
-            <li class="list-group-item p-3">
-                Ei ole tehhtäviä    
+          {% for el in alltodos %}
+            <li id="{{el.id}}" class="list-group-item d-flex justify-content-between align-items-center {{ el.item_class }} me-1" >
+              {{el.todoitem}}
+              <div style="" class="d-flex">
+                <a href="{% url 'done_item' el.id %}"><button class="btn {{ el.btn_done_class }} me-1">✓</button></a>
+                <a href="#" onclick="return false;" class="edit_btn" id_a="{{el.id}}"><button class="btn btn-outline-secondary me-1">Edit</button></a>
+                <a href="{% url 'remove_item' el.id %}"><button class="btn btn-outline-danger">Delete</button></a>
+              </div>
             </li>
+            <div class="block_edit" id="block_edit_{{el.id}}" style="display: none;">
+              <form method="post" action="{% url 'update_item' el.id %}">
+                <div class="row row_my edit_row">
+                  {% csrf_token %}
+                  <div class="col-auto_my ms-3">
+                      {{ form.todoitem }}
+                  </div>
+                  <div class="col-auto">
+                      <button type="submit" class="btn btn-success mb-4 px-4">Update</button>
+                  </div>
+                </div>
+                <span>{{ error }}</span>
+              </form>
+            </div>
+          {% endfor %}
         </ul>
-        {% endif %}
-        
-        <!-- <form class="row gy-2 gx-3 align-items-center">
-            <div class="col-auto">
-              <label class="visually-hidden" for="autoSizingInput">Name</label>
-              <input type="text" class="form-control" id="autoSizingInput" placeholder="Jane Doe">
-            </div>
-            <div class="col-auto">
-              <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
-              <div class="input-group">
-                <div class="input-group-text">@</div>
-                <input type="text" class="form-control" id="autoSizingInputGroup" placeholder="Username">
-              </div>
-            </div>
-            <div class="col-auto">
-              <label class="visually-hidden" for="autoSizingSelect">Preference</label>
-              <select class="form-select" id="autoSizingSelect">
-                <option selected>Choose...</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-            </div>
-            <div class="col-auto">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="autoSizingCheck">
-                <label class="form-check-label" for="autoSizingCheck">
-                  Remember me
-                </label>
-              </div>
-            </div>
-            <div class="col-auto">
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-          </form> -->
-    </article>
+      {% else %}
+    </div>
+    <ul class="list-group">
+      <li class="list-group-item p-3">
+          Ei ole tehhtäviä    
+      </li>
+    </ul>
+    {% endif %}
+      
+  </article>
 </body>
 </html>
 

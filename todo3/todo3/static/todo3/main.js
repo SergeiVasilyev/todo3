@@ -15,14 +15,17 @@ $(document).ready(function() {
     }
 
     // Функция кнопки EDIT, выводит поле с форомой Input
+    // И получает текущее значение todoitem из базы данных
     $('.edit_btn').click(function(){
       console.log('CLICK A ' + $(this).attr("id_a"))
       var idx = $(this).attr("id_a")
-      console.log($('#' + idx).hasClass("list-group-item-strikethrough"))
+      //console.log($('#' + idx).hasClass("list-group-item-strikethrough"))
       if (!$('#' + idx).hasClass("list-group-item-strikethrough")){
         $('#block_edit_'+idx).toggle("slow")
       }
-      //block_edit_{{el.id}}
+      $.get('data_update_form/'+idx+'/', function (data, status) {
+        $('#block_edit_'+idx+' form input').val(data)
+      });
     })
     
     // Функция изменяя классы и css переносит кнопки списка дел на новую строку, если экран меньше 500px

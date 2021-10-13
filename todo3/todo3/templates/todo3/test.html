@@ -51,6 +51,37 @@
               <button type="submit" class="btn btn-primary">Submit</button>
             </div>
           </form>
+
+          <div class="list_warp">
+            {% if alltodos %}
+              <ul class="list-group">
+                {% for el in alltodos %}
+                  <li id="{{el.id}}" class="list-group-item d-flex justify-content-between align-items-center {{ el.item_class }} me-1" >
+                    {{el.todoitem}}
+                    <div style="" class="d-flex"><!-- ✓ --><a href="{% url 'done_item' el.id %}"><button class="btn {{ el.btn_done_class }} me-1 p-1"><img class="icons" src="{% static 'todo3/icons/icons_left.png' %}" /></button></a>
+                      <a href="{% url 'done_item' el.id %}"><button class="btn {{ el.btn_done_class }} me-1 p-1"><img class="icons" src="{% static 'todo3/icons/icons-done.png' %}" /></button></a>
+                      <a href="#" onclick="return false;" class="edit_btn" id_a="{{el.id}}"><button class="btn btn-outline-secondary me-1 p-1"><img class="icons" src="{% static 'todo3/icons/icons_edit.png' %}" /></button></a>
+                      <a href="{% url 'remove_item' el.id %}"><button class="btn btn-outline-danger p-1"><img class="icons" src="{% static 'todo3/icons/icons-trash.png' %}" /></button></a>
+                    </div>
+                  </li>
+                  <div class="block_edit" id="block_edit_{{el.id}}" style="display: none;">
+                    <form method="post" action="{% url 'update_item' el.id %}">
+                      <div class="row row_my edit_row">
+                        {% csrf_token %}
+                        <div class="col-auto_my ms-3">
+                            {{ form.todoitem }}
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-success mb-4 px-4">Update</button>
+                        </div>
+                      </div>
+                      <span>{{ error }}</span>
+                    </form>
+                  </div>
+                {% endfor %}
+              </ul>
+            {% else %}
+          </div>
           
 </body>
 </html>

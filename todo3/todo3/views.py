@@ -69,11 +69,13 @@ def mark_item(request, idx):
    item.save()
    #print(item.todoitem_fav)
    return HttpResponse(res)
-
+   
+@csrf_exempt
 def update_item (request, idx):
    print('idx ', idx)
    item = Todolist.objects.get(id=idx)
    print('item ', item.todoitem)
+   
    form = TodolistForm(request.POST)
    if form.is_valid():
       print('REQUEST:: ', form.cleaned_data['todoitem'])
@@ -82,6 +84,10 @@ def update_item (request, idx):
       item.todoitem = el_todoitem
       item.save()
    return redirect('home')
+
+def data_update_form (request, idx):
+   item = Todolist.objects.get(id=idx)
+   return HttpResponse(item.todoitem)
 
 def testbase (request):
    error = ''

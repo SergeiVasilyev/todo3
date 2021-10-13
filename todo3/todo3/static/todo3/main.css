@@ -74,6 +74,14 @@ a:link, a:visited, a {
     border: 1px red solid;
 } */
 
+.icons {
+    width: 32px;
+}
+
+.simbol {
+    color: green;
+}
+
 @media only screen and (max-width: 600px) {
 
   }

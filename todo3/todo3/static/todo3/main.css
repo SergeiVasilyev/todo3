@@ -2,18 +2,24 @@ body {
     background-color: #f5f5f5;
 }
 
+/* .header, .header div, .header h1 {
+    border: 1px red solid;
+} */
+/* h1 {
+    margin-bottom: 0.5em;
+} */
+
+/* .warp {
+    background-image: url(icons/pattern-01.png);
+    background-repeat: round;
+} */
+
 article {
-    max-width: 720px;
+    /* max-width: 720px; */
+    max-width: 800px;
     min-width: 360px;
     background-color: #ffffff;
-}
 
-h1 {
-    margin-bottom: 0.5em;
-}
-
-.container-my {
-    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
     padding: 1em;
@@ -25,9 +31,36 @@ h1 {
     justify-content: space-between;
 }
 
+.block_edit {
+    padding-top: 1em;
+    min-width: 100%;
+    /* height: 70px; */
+    height: 160px;
+    border: 1px #dbdbdb solid;
+}
+
+.edit_row {
+    padding-right: 1em;
+}
+
 .col-auto_my {
     overflow: hidden;
     flex: 2 1 200px;
+}
+
+.col-auto_my textarea {
+    max-height: 5em;
+}
+
+.block_description{
+    font-size: 0.85em;
+    min-width: 100%;
+}
+
+.block_description ul li div{
+    /* border: 1px red solid; */
+    padding-left: 1em;
+    border-left: 1px lightgrey solid;
 }
 
 .list_warp ul li:nth-child(odd) {
@@ -58,17 +91,6 @@ a:link, a:visited, a {
     
 }
 
-.block_edit {
-    padding-top: 1em;
-    min-width: 100%;
-    height: 70px;
-    border: 1px #dbdbdb solid;
-}
-
-.edit_row {
-    padding-right: 1em;
-}
-
 /* .list_link {
     display:flex;
     border: 1px red solid;
@@ -81,6 +103,8 @@ a:link, a:visited, a {
 .simbol {
     color: green;
 }
+
+
 
 @media only screen and (max-width: 600px) {
 

@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     // AJAX функция, помечает элемент зеленым изменяя класс li 
     // и отправляет на сервер запрос для изменения в бпзе данных поля tofoitem_fav
     document.querySelector('.list-group').onclick = function (event) {
@@ -8,7 +9,6 @@ $(document).ready(function() {
       if(!$(event.target).hasClass('list-group-item-strikethrough') && $(event.target).is('li')){
         $.post('mark_item/'+idx+'/', function (data, status) {
           console.log('data ' + data);
-          //console.log($('#' + idx).attr('class'));
           $('#' + idx).toggleClass('list-group-item-success list-group-item-light');
         });
       };
@@ -21,13 +21,25 @@ $(document).ready(function() {
       var idx = $(this).attr("id_a")
       //console.log($('#' + idx).hasClass("list-group-item-strikethrough"))
       if (!$('#' + idx).hasClass("list-group-item-strikethrough")){
-        $('#block_edit_'+idx).toggle("slow")
+        $('#block_edit_'+idx).toggle("fast")
       }
       $.get('data_update_form/'+idx+'/', function (data, status) {
-        $('#block_edit_'+idx+' form input').val(data)
+        console.log(data)
+        $('#block_edit_'+idx+' form input').val(data.todoitem)
+        $('#block_edit_'+idx+' form textarea').val(data.todo_description)
       });
     })
     
+    // Функция открытия блока с описанием, по нажатию кнопки со стрелкой
+    $('.description_btn').click(function(){
+      var idx = $(this).attr("id_edit_a")
+      if (!$('#' + idx).hasClass("list-group-item-strikethrough")){
+        $('#block_description_'+idx).toggle("fast")
+        console.log ($(this).find("i").attr('class'))
+        $(this).find("i").toggleClass("bi-caret-down bi-caret-left")
+      }
+    })
+
     // Функция изменяя классы и css переносит кнопки списка дел на новую строку, если экран меньше 500px
     // а также изменяет padding & margin
     checkWidth(); // проверит при загрузке страницы

@@ -5,6 +5,7 @@ class Todolist(models.Model):
     todoitem = models.CharField(max_length=800)
     todoitem_fav = models.BooleanField()
     todoitem_done = models.BooleanField()
+    todo_description = models.CharField(max_length=1000, default=None, blank=True, null=True)
     
     def item_class(self):
         classes = []
@@ -29,4 +30,4 @@ class Todolist(models.Model):
 
     def __str__(self):
         # return f"Todolist ID>>> {self.id}, Todoitem>>> {self.todoitem}"
-        return f"Todolist: {self.id} | {self.todoitem} | {self.todoitem_fav} | {self.todoitem_done}"
+        return f"Todolist: {self.id} | {self.todoitem} | {self.todoitem_fav} | {self.todoitem_done} | {self.todo_description}"

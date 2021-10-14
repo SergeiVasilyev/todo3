@@ -59,25 +59,28 @@ def mark_item(request, idx):
    item = Todolist.objects.get(id=idx) # SELECT * FROM Todolist WHERE id=idx
    if not item.todoitem_fav:
       item.todoitem_fav = True
+      res = 'list-group-item-success'
    else:
       item.todoitem_fav = False
+      res = 'list-group-item-light'
    item.save()
    #print(item.todoitem_fav)
-   return HttpResponse(item.todoitem_fav)
+   return HttpResponse(res)
 
 @csrf_exempt
 def update_item (request, idx):
    print('idx ', idx)
-   item = Todolist.objects.get(id=idx) # SELECT * FROM Todolist WHERE id=idx
+   item = Todolist.objects.get(id=idx)
    print('item ', item.todoitem)
    
-   form = TodolistForm(request.POST) # Saamme tietoja FORM elementistä
+   form = TodolistForm(request.POST)
    if form.is_valid():
-      print('REQUEST:: ', form.cleaned_data['todoitem']) 
-      
-      # Vaihdamme saadut arvot tietokannassa
-      item.todoitem = form.cleaned_data['todoitem'] # cleaned_data kautta voimme saada tietoja erikseen 
-      item.todo_description = form.cleaned_data['todo_description']
+      print('REQUEST:: ', form.cleaned_data['todoitem'])
+      el_todoitem = form.cleaned_data['todoitem']
+      el_todo_description = form.cleaned_data['todo_description']
+      # rec = Todolist(todoitem=el_todoitem, todoitem_fav=item.todoitem_fav, todoitem_done=item.todoitem_done)
+      item.todoitem = el_todoitem
+      item.todo_description = el_todo_description
       item.save()
    return redirect('home')
 

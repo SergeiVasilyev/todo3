@@ -5,17 +5,31 @@ from django.http import JsonResponse
 from django.shortcuts import HttpResponse
 
 
-from .forms import TodolistForm
-from .models import Todolist
+from .forms import TodolistForm, TodoCatForm
+from .models import Todolist, TodoCat
 
 
 def index(request):
    error = ''
    if request.method == 'POST':
       form = TodolistForm(request.POST)
-      print('REQUEST:: ', form.base_fields)
-      if form.is_valid():
-         form.save()
+      cat = TodoCatForm(request.POST)
+      #print('REQUEST:: ', form.base_fields)
+      if cat.is_valid() and cat.cleaned_data['name']:
+         category = cat.save()
+      else:
+         category = None
+      if form.is_valid(): 
+         # Переделать форин кей, соеденить с ID
+         # django form change field value
+         # https://docs.djangoproject.com/en/3.2/topics/forms/modelforms/
+         if category:
+            todo_item = form.save(commit=False)
+            todo_item.category = category
+            todo_item.save()
+         else:
+            form.save()
+         
          return redirect('home')
       else:
          error = 'ERROR'
@@ -23,9 +37,11 @@ def index(request):
    # todos = Todolist.objects.all()
    todos = Todolist.objects.order_by('-id') # lajittelu kohteet päinvastaisessa järjestyksessä 
    form = TodolistForm()
+   cat = TodoCatForm()
 
    context = {
       'form': form,
+      'cat': cat,
       'alltodos': todos,
    }
    return render(request, 'todo3/index.html', context)

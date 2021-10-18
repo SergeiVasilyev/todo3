@@ -19,7 +19,9 @@ Kun olet saanut ensimmäiset kolme ominaisuutta tehtyä, niin voit jatkaa lisäo
 г) на экране добавить еще одно поле с папками и возможностью показать все заметки   
 
 Lisää kansioita tai luokkia: luo uusi taulukko ja yhdistä se olemassa olevaan taulukkoon
-a) Taulukossa - ID, ulkomaalainen tunnus, Kategorian nimi
+a) Taulukossa - ID, Kategorian nimi
 b) koko luokan poistaminen sisäkkäisillä tehtävillä
 c) tee editointitoiminnon sisällä avattava luettelo, jossa on olemassa olevat luokat ja mahdollisuus lisätä uusi
 d) lisää näytölle toinen kenttä, jossa on kansioita ja mahdollisuus näyttää kaikki muistiinpanot 
+
+viiteavain

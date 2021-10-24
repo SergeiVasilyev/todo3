@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{% static 'todo3/main.css' %}">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <script src="{% static 'todo3/main.js' %}"></script>
+  <title>Edit category</title>
+</head>
+<body>
+    <div class="warp">
+    <article>
+        <div class="header d-flex justify-content-between align-items-center mb-4">
+            <div class="align-self-center">
+              <h1 class="display-1"><a href="{% url 'home' %}">Todo<sup>app</sup></a></h1>
+            </div>
+            <div class="d-flex align-items-end flex-column">
+              <div><h4><a href="{% url 'home' %}">Edit category</a></h4></div>
+            </div>
+        </div>
+        <div class="list_warp">
+            {% if categories %}
+              <ul class="list-group">
+                {% for el in categories %}
+                  <li id="{{el.id}}" class="list-group-item d-flex justify-content-between align-items-center" >
+                    {{el.name}}
+                    <div class="d-flex">
+                      <a href="{% url 'remove_cat' el.id %}"><button class="btn btn-outline-danger"><i class="bi bi-trash"></i></button></a>
+                    </div>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+    </article>
+    </div>
+</body>
+</html>
+

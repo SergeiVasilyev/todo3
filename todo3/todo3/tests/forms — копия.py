@@ -44,7 +44,7 @@ class TodoCatForm(ModelForm):
     # https://stackoverflow.com/questions/24045135/django-make-certain-fields-in-a-modelform-required-false
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        #print('222!!!!!!!!!!! ', self.fields['name'])
+        print('!!!!!!!!!!! ', self.fields['name'])
         self.fields['name'].required = False
         
 
@@ -61,11 +61,22 @@ class FormForm(ModelForm):
             }),
         }
 
+    #char_field_with_list = forms.CharField(required=True)
+
     def __init__(self, *args, **kwargs):
         _country_list = kwargs.pop('data_list', None)
         super(FormForm, self).__init__(*args, **kwargs)
-        self.fields['name'].required = False
-        #print('!!!!!!!!!!! ', self.fields['name'])
+        self.fields['name'].required = True
+        print('!!!!!!!!!!! ', self.fields['name'])
 
+        # the "name" parameter will allow you to use the same widget more than once in the same
+        # form, not setting this parameter differently will cuse all inputs display the
+        # same list.
         self.fields['name'].widget = ListTextWidget(data_list=_country_list, name='country-list')
 
+    # def clean(self):
+    #     super(FormForm, self).clean()
+    #     username = self.cleaned_data['name']
+    #     if TodoCat.objects.exclude(pk=self.instance.pk).filter(name=username).exists():
+    #         raise forms.ValidationError(f'Username "{username}" is already in use.')
+    #     return username

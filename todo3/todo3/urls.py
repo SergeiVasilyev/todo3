@@ -30,4 +30,7 @@ urlpatterns = [
     path('update_item/<int:idx>/', views.update_item, name='update_item'),
     path('data_update_form/<int:idx>/', views.data_update_form, name='data_update_form'),
     path('testbase/', views.testbase, name='testbase'),
+    path('editcat/', views.editcat, name='editcat'),
+    path('remove_cat/<int:idx>/', views.remove_cat, name='remove_cat'),
+    #path('testform/', views.testform, name='testform'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

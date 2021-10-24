@@ -2,48 +2,55 @@ from django.http import response
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-from django.shortcuts import HttpResponse
+from django.shortcuts import HttpResponse, HttpResponseRedirect
 
 
 from .forms import TodolistForm, TodoCatForm
 from .models import Todolist, TodoCat
-
+from .forms import FormForm
 
 def index(request):
-   error = ''
+   cats = TodoCat.objects.order_by('-id')
+   form_cat = FormForm(data_list=cats)
+   category = None
    if request.method == 'POST':
-      form = TodolistForm(request.POST)
-      cat = TodoCatForm(request.POST)
-      #print('REQUEST:: ', form.base_fields)
-      if cat.is_valid() and cat.cleaned_data['name']:
-         category = cat.save()
+      form_cat = FormForm(request.POST)
+      print('request.POST.get("name") ', request.POST.get("name"))
+      if form_cat.is_valid() and request.POST.get("name"): # срабатывает если значение новое, а не из базы данных
+         print('is_valid = VALID')
+         print('form_cat.cleaned_data["name"]:: ', form_cat.cleaned_data['name']) # иначе добовляем новую категорию
+         category = form_cat.save() # записываем новое значение в переменную как инстанс TodoCat
+         print('category ', category)
+      elif request.POST.get("name") and not category: # Если значение выбирается из БД, то 
+         category = TodoCat.objects.get(name=request.POST.get("name")) # Ищем существующую категорию и записываем в переменную как инстанс TodoCat
+         print('item', category)
       else:
-         category = None
-      if form.is_valid(): 
-         # Переделать форин кей, соеденить с ID
-         # django form change field value
-         # https://docs.djangoproject.com/en/3.2/topics/forms/modelforms/
-         if category:
-            todo_item = form.save(commit=False)
-            todo_item.category = category
-            todo_item.save()
-         else:
-            form.save()
-         
+         category = None # Присвоить None переменной можно, но может быть продумать значение по умолчанию
+         error = 'ERROR'
+         #print(error)
+         return redirect('home')
+
+      form = TodolistForm(request.POST)
+      if form.is_valid():
+         print('REQUEST2 form.is_valid:: ', request.POST.get("name"))
+         todo_item = form.save(commit=False)
+         todo_item.category = category # Можно передать значение только через инстанс TodoCat, так как он указан в моделе Todolist ...ForeignKey(TodoCat...
+         todo_item.save()
+         #form.save()
          return redirect('home')
       else:
          error = 'ERROR'
 
-   # todos = Todolist.objects.all()
-   todos = Todolist.objects.order_by('-id') # lajittelu kohteet päinvastaisessa järjestyksessä 
+   alltodos = Todolist.objects.order_by('-id') # lajittelu kohteet päinvastaisessa järjestyksessä 
    form = TodolistForm()
-   cat = TodoCatForm()
-
+   categories = TodoCat.objects.order_by('name') 
    context = {
       'form': form,
-      'cat': cat,
-      'alltodos': todos,
+      'form_cat': form_cat,
+      'alltodos': alltodos,
+      'categories': categories
    }
+
    return render(request, 'todo3/index.html', context)
 
 
@@ -117,9 +124,14 @@ def testbase (request):
 
 
 
-# def chek_fav(args):
-#    class_highlight = {'true': 'list-group-item-light', 'false': 'list-group-item-warning'}
-#    if args:
-#       return class_highlight.true
-#    else:
-#       return class_highlight.false
+def editcat (request):
+   categories = TodoCat.objects.order_by('name') 
+   context = {
+      'categories': categories,
+   }
+   return render(request, 'todo3/category_manage.html', context)
+
+def remove_cat(request, idx):
+   item = TodoCat.objects.get(id=idx)
+   item.delete()
+   return redirect('editcat')

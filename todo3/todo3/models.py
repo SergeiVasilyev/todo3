@@ -5,14 +5,16 @@ class TodoCat(models.Model):
     name = models.CharField(max_length=400, unique=True, blank=False)
 
     def __str__(self):
-        return f"Todocat: {self.id} | {self.name}"
+        return self.name
+    # def __str__(self):
+    #     return f"Todocat: {self.id} | {self.name}"
 
 class Todolist(models.Model):
     todoitem = models.CharField(max_length=800)
     todoitem_fav = models.BooleanField()
     todoitem_done = models.BooleanField()
     todo_description = models.CharField(max_length=1000, default=None, blank=True, null=True)
-    category = models.ForeignKey(TodoCat, on_delete=models.CASCADE, to_field='name', blank=True, null=True) #SET_DEFAULT
+    category = models.ForeignKey(TodoCat, on_delete=models.CASCADE, blank=True, null=True) #SET_DEFAULT , to_field='name'
     
     def item_class(self):
         classes = []

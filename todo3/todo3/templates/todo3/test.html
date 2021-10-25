@@ -17,6 +17,18 @@
         </div>
     </form>
 
+
+    <label for="ice-cream-choice">Choose a flavor:</label>
+    <input list="ice-cream-flavors" id="ice-cream-choice" name="ice-cream-choice" />
+    
+    <datalist id="ice-cream-flavors">
+        <option value="Chocolate">
+        <option value="Coconut">
+        <option value="Mint">
+        <option value="Strawberry">
+        <option value="Vanilla">
+    </datalist>
+
     
     <form class="row gy-2 gx-3 align-items-center">
             <div class="col-auto">
@@ -82,6 +94,35 @@
               </ul>
             {% else %}
           </div>
-          
+  
+
+
+    <!-- <label for="ice-cream-choice" ></label> -->
+    <!-- <input list="ice-cream-flavors" class="btn dropdown-toggle form-control" placeholder="Category" />
+    <datalist id="ice-cream-flavors" >
+        <option value="Chocolate">
+        <option value="Coconut">
+        <option value="Mint">
+        <option value="Strawberry">
+        <option value="Vanilla">
+    </datalist> -->
+
+
+
+  <!-- <form action="/contact/" method="post">
+    {% for field in form %}
+        <div class="fieldWrapper">
+            {{ field.errors }}
+            {{ field.label_tag     }}
+        </div>
+    {% endfor %}
+    <p><input type="submit" value="Send message" /></p>
+</form> -->
+<!-- <input list="cat_items" class="btn dropdown-toggle form-control" placeholder="Category" />
+                <datalist id="cat_items">
+                    {% for el in alltodos %}
+                    <option>{{ el.category }}</option>
+                    {% endfor %}
+                </datalist> -->
 </body>
 </html>

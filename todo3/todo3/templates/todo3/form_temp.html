@@ -1,11 +1,21 @@
-<form method="post" class="mb-4">
+<form method="post" class="mb-4" autocomplete="off">
     <div class="row row_my">
         {% csrf_token %}
         <div class="col-auto_my">
             {{ form.todoitem }}
             {{ form.todo_description }}
-            {{ form.category }}
-            {{ cat.name }}
+            
+            <!-- {{ form.category }}
+            {{ cat.name }} -->
+            
+            <div class="row">
+                <div class="col-auto_my">
+                    {{ form_cat.name }}
+                </div>
+                <div class="col-auto">
+                    <a href="{% url 'editcat' %}"><button type="button" class="btn btn-primary mb-4 px-4">Edit category</button></a>
+                </div>
+            </div>
         </div>
         <div class="col-auto">
             <button type="submit" class="btn btn-success mb-4 px-4">Submit</button>

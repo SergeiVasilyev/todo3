@@ -5,13 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: runserver",
+            "name": "Python: Django",
             "type": "python",
             "request": "launch",
             "cwd": "${workspaceRoot}/todo3",
             "program": "manage.py",
             "args": ["runserver"],
-            "console": "integratedTerminal"
+            //"console": "integratedTerminal"
+            "django": true
         },
     ]
 }

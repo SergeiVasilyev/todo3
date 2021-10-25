@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     // AJAX функция, помечает элемент зеленым изменяя класс li 
     // и отправляет на сервер запрос для изменения в бпзе данных поля tofoitem_fav
-    document.querySelector('.list-group').onclick = function (event) {
+    document.querySelector('.tasks_list').onclick = function (event) {
       //console.log($(event.target).attr("id"));
       //console.log(event.target);
       var idx = $(event.target).attr("id");

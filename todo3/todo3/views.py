@@ -17,7 +17,6 @@ def index(request):
       form_cat = FormForm(request.POST)
       print('request.POST.get("name") ', request.POST.get("name"))
       if form_cat.is_valid() and request.POST.get("name"): # срабатывает если значение новое, а не из базы данных
-         print('is_valid = VALID')
          print('form_cat.cleaned_data["name"]:: ', form_cat.cleaned_data['name']) # иначе добовляем новую категорию
          category = form_cat.save() # записываем новое значение в переменную как инстанс TodoCat
          print('category ', category)
@@ -125,9 +124,13 @@ def testbase (request):
 
 
 def editcat (request):
-   categories = TodoCat.objects.order_by('name') 
+   categories = TodoCat.objects.order_by('name')
+   categories_and_forms = []
+   for category in categories:
+      form = TodoCatForm(initial={"name": category.name})
+      categories_and_forms.append((category, form))
    context = {
-      'categories': categories,
+      'categories_and_forms': categories_and_forms,
    }
    return render(request, 'todo3/category_manage.html', context)
 
@@ -135,3 +138,17 @@ def remove_cat(request, idx):
    item = TodoCat.objects.get(id=idx)
    item.delete()
    return redirect('editcat')
+
+def update_catitem (request, idx):
+   print('idx ', idx)
+   item = TodoCat.objects.get(id=idx) # SELECT * FROM Todolist WHERE id=idx
+   print('item ', item.name)
+   
+   form = TodoCatForm(request.POST) # Saamme tietoja FORM elementistä
+   if form.is_valid():
+      print('REQUEST:: ', form.cleaned_data['name']) 
+      # Vaihdamme saadut arvot tietokannassa
+      item.name = form.cleaned_data['name']
+      item.save()
+   return redirect('editcat')
+

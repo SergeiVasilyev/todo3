@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
+import mimetypes
+mimetypes.add_type('application/javascript', '.js')
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,7 +29,7 @@ SECRET_KEY = 'django-insecure-^#!iq(d&)^&8jq1^k8rp5@bqi^a0dd1v6#p!1rc01u#m(fk_mj
 DEBUG = True
 
 ALLOWED_HOSTS = ['192.168.1.30', '127.0.0.1', '192.168.196.128', '192.168.253.55']
-
+INTERNAL_IPS = ['127.0.0.1'] # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html
 
 # Application definition
 
@@ -37,10 +40,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
     'todo3', # Lisätty rivi
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

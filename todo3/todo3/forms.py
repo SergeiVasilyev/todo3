@@ -41,12 +41,12 @@ class TodoCatForm(ModelForm):
             }),
         }
 
+
     # https://stackoverflow.com/questions/24045135/django-make-certain-fields-in-a-modelform-required-false
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         #print('222!!!!!!!!!!! ', self.fields['name'])
         self.fields['name'].required = False
-        
 
 
 
@@ -66,6 +66,5 @@ class FormForm(ModelForm):
         super(FormForm, self).__init__(*args, **kwargs)
         self.fields['name'].required = False
         #print('!!!!!!!!!!! ', self.fields['name'])
-
         self.fields['name'].widget = ListTextWidget(data_list=_country_list, name='country-list')
 

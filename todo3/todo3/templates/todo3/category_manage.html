@@ -24,15 +24,39 @@
             </div>
         </div>
         <div class="list_warp">
-            {% if categories %}
+            {% if categories_and_forms %}
               <ul class="list-group">
-                {% for el in categories %}
+                {% for el, catform in categories_and_forms %}
                   <li id="{{el.id}}" class="list-group-item d-flex justify-content-between align-items-center" >
                     {{el.name}}
                     <div class="d-flex">
-                      <a href="{% url 'remove_cat' el.id %}"><button class="btn btn-outline-danger"><i class="bi bi-trash"></i></button></a>
+                      <a href="#" onclick="return false;" class="edit_btn" id_a="{{el.id}}">
+                        <button class="btn btn-outline-secondary me-1">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                      </a>
+                      <a href="{% url 'remove_cat' el.id %}">
+                        <button class="btn btn-outline-danger">
+                          <i class="bi bi-trash"></i>
+                        </button>
+                      </a>
                     </div>
                   </li>
+                  <!-- BLOCK EDIT CAT ITEM -->
+                  <div class="block_edit" id="block_edit_{{el.id}}" style="display: none;">
+                    <form method="post" action="{% url 'update_catitem' el.id %}">
+                      <div class="row row_my edit_row">
+                        {% csrf_token %}
+                        <div class="col-auto_my ms-3">
+                            {{ catform.name }}
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-success mb-1 px-4">Update</button>
+                        </div>
+                      </div>
+                      <span>{{ error }}</span>
+                    </form>
+                  </div>
                 {% endfor %}
               </ul>
             {% endif %}

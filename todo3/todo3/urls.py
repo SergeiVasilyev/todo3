@@ -13,10 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import debug_toolbar
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 
 from todo3 import views
 
@@ -32,5 +33,7 @@ urlpatterns = [
     path('testbase/', views.testbase, name='testbase'),
     path('editcat/', views.editcat, name='editcat'),
     path('remove_cat/<int:idx>/', views.remove_cat, name='remove_cat'),
+    path('update_catitem/<int:idx>/', views.update_catitem, name='update_catitem'),
     #path('testform/', views.testform, name='testform'),
+    path('__debug__/', include(debug_toolbar.urls)),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

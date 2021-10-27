@@ -68,7 +68,7 @@
                         <div>
                           <!-- <p>Task deskription</p> -->
                           {% if el.todo_description != none %}
-                            {{el.todo_description}}
+                            {{el.todo_description|safe}}
                           {% else %}
                             -
                           {% endif %}

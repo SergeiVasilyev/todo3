@@ -40,9 +40,14 @@ def index(request):
       else:
          error = 'ERROR'
 
-   alltodos = Todolist.objects.order_by('-id') # lajittelu kohteet päinvastaisessa järjestyksessä 
+   cat = TodoCat.objects.get(selected=True)
+   # alltodos = Todolist.objects.order_by('-id') # lajittelu kohteet päinvastaisessa järjestyksessä 
+   if not cat.id == 1:
+      alltodos = Todolist.objects.filter(category=cat).order_by('-id') # lajittelu kohteet päinvastaisessa järjestyksessä 
+   else:
+      alltodos = Todolist.objects.order_by('-id') # lajittelu kohteet päinvastaisessa järjestyksessä 
    form = TodolistForm()
-   categories = TodoCat.objects.order_by('name') 
+   categories = TodoCat.objects.order_by('id')
    context = {
       'form': form,
       'form_cat': form_cat,
@@ -51,6 +56,19 @@ def index(request):
    }
 
    return render(request, 'todo3/index.html', context)
+
+def select_cat(request, idx):
+   new_selected = TodoCat.objects.get(id=idx)
+   deselect = TodoCat.objects.get(selected=True)
+
+   new_selected.selected = True
+   new_selected.save()
+
+   deselect.selected = False
+   deselect.save()
+
+   return redirect('home')
+
 
 
 def remove_item(request, idx):

@@ -15,15 +15,17 @@
 <body>
   <div class="warp">
   <div class="row justify-content-md-center">
-    <div class="cat_col col col-lg-1">
-      <div class="cat_warp w-100 h-100 d-inline-block align-items-center d-flex">
+    <div class="cat_col col" style="height: 100px;">
+      <div class="cat_warp w-100 h-100 d-inline-block">
         <div class="cat_menu w-100">
           <h5 class="ps-2">Categories</h5>
           <ul class="list-group category_list px-2 py-4">
             {% for el in categories %}
-              <li id="cat_{{el.id}}" class="list-group-item d-flex justify-content-between align-items-center" >
-                {{el.name}}
-              </li>
+              <a class="cat_link" href="{% url 'select_cat' el.id %}">
+                <li id="cat_{{el.id}}" class="cat_li list-group-item d-flex justify-content-between align-items-center {{ el.item_class }}" >
+                  {{el.name}}
+                </li>
+              </a>
             {% endfor %}
           </ul>
         </div>
@@ -39,6 +41,7 @@
             <div>your days</div> -->
           </div>
         </div>
+        
         <!-- Lomakkeen yhteys tiedostosta -->
         {% include "todo3/form_temp.html" %}
 

@@ -3,9 +3,17 @@ from django.db import models
 
 class TodoCat(models.Model):
     name = models.CharField(max_length=400, unique=True, blank=False)
+    selected = models.BooleanField()
+
+    def item_class(self):
+        classes = []
+        if self.selected :
+            classes.append("selected")
+        return " ".join(classes)
 
     def __str__(self):
         return self.name
+
     # def __str__(self):
     #     return f"Todocat: {self.id} | {self.name}"
 

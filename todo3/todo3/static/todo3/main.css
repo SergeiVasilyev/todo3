@@ -8,6 +8,7 @@ body {
 }
 .cat_col{
     /* border: 1px green solid; */
+    margin-top: 8em;
     min-width: 220px;
     max-width: 220px;
 }
@@ -28,11 +29,13 @@ body {
     background-repeat: round;
 } */
 
-article {
+.article {
     /* max-width: 720px; */
     max-width: 800px;
     min-width: 460px;
     background-color: #ffffff;
+    
+
 
     /* margin-left: auto;
     margin-right: auto; */
@@ -121,7 +124,13 @@ a:link, a:visited, a {
     color: green;
 }
 
+.cat_li:hover{
+    background-color: #dddddd;
+}
 
+.selected{
+    background-color: #e6e6e6;
+}
 
 @media only screen and (max-width: 600px) {
 

@@ -35,5 +35,6 @@ urlpatterns = [
     path('remove_cat/<int:idx>/', views.remove_cat, name='remove_cat'),
     path('update_catitem/<int:idx>/', views.update_catitem, name='update_catitem'),
     #path('testform/', views.testform, name='testform'),
+    path('select_cat/<int:idx>/', views.select_cat, name='select_cat'),
     path('__debug__/', include(debug_toolbar.urls)),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

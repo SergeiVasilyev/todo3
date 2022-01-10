@@ -3,7 +3,7 @@ from django.db import models
 
 class TodoCat(models.Model):
     name = models.CharField(max_length=400, unique=True, blank=False)
-    selected = models.BooleanField()
+    selected = models.BooleanField(default=0)
 
     def item_class(self):
         classes = []

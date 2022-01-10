@@ -30,6 +30,7 @@ urlpatterns = [
     path('mark_item/<int:idx>/', views.mark_item, name='mark_item'),
     path('update_item/<int:idx>/', views.update_item, name='update_item'),
     path('data_update_form/<int:idx>/', views.data_update_form, name='data_update_form'),
+    path('editcat/data_update_cat_form/<int:idx>/', views.data_update_cat_form, name='data_update_cat_form'),
     path('testbase/', views.testbase, name='testbase'),
     path('editcat/', views.editcat, name='editcat'),
     path('remove_cat/<int:idx>/', views.remove_cat, name='remove_cat'),

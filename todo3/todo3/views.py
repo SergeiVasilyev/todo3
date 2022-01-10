@@ -64,8 +64,9 @@ def select_cat(request, idx):
    new_selected.selected = True
    new_selected.save()
 
-   deselect.selected = False
-   deselect.save()
+   if new_selected.id != deselect.id:
+      deselect.selected = False
+      deselect.save()
 
    return redirect('home')
 
@@ -87,7 +88,7 @@ def favorite_item(request, idx):
 
 def done_item(request, idx):
    item = Todolist.objects.get(id=idx) # SELECT * FROM Todolist WHERE id=idx
-   if not item.todoitem_done:
+   if not item.todoitem_done: # Есть ли более удобный способ переключения true to false и назад?!!!!!!!!
       item.todoitem_done = True
    else:
       item.todoitem_done = False
@@ -113,17 +114,23 @@ def update_item (request, idx):
    
    form = TodolistForm(request.POST) # Saamme tietoja FORM elementistä
    if form.is_valid():
-      print('REQUEST:: ', form.cleaned_data['todoitem']) 
+      print('REQUEST:: ', form.cleaned_data['category']) 
       
       # Vaihdamme saadut arvot tietokannassa
       item.todoitem = form.cleaned_data['todoitem'] # cleaned_data kautta voimme saada tietoja erikseen 
       item.todo_description = form.cleaned_data['todo_description']
+      item.category = form.cleaned_data['category']
       item.save()
    return redirect('home')
 
 def data_update_form (request, idx):
    item = Todolist.objects.get(id=idx)
    data = {'todoitem': item.todoitem, 'todo_description': item.todo_description}
+   return JsonResponse(data)
+
+def data_update_cat_form (request, idx):
+   item = TodoCat.objects.get(id=idx)
+   data = {'name': item.name}
    return JsonResponse(data)
 
 def testbase (request):

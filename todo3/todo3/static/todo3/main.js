@@ -29,7 +29,7 @@ $(document).ready(function() {
         $('#block_edit_'+idx+' form textarea').val(data.todo_description)
       });
     })
-    
+
     // Функция открытия блока с описанием, по нажатию кнопки со стрелкой
     $('.description_btn').click(function(){
       var idx = $(this).attr("id_edit_a")

@@ -91,8 +91,14 @@
                       <div class="col-auto_my ms-3">
                           {{ form.todoitem }}
                           {{ form.todo_description }}
-                          {{ form.category }} <!-- Найти решение: установленная категория
-                          <select name="category" class="btn dropdown-toggle mb-2" id="cat_items">
+                          {{ form.category }}
+                          <!-- {{ form.category.field }} Найти решение: установленная категория -->
+                          <!-- <select name="category" class="btn dropdown-toggle mb-2" id="cat_items">
+                            {% for value, text in form.category.field.choices %}
+                              <option value="{{value}}" {% if form.category.data == text %} selected {% endif %}>{{ form.category.name }}</option>
+                            {% endfor %}
+                          </select> -->
+                          <!-- <select name="category" class="btn dropdown-toggle mb-2" id="cat_items">
                             {% for value, text in form.category.field.choices %}
                               <option value="{{value}}" {% if form.category.field.category_id == value %} selected{% endif %} >{{ form.fields.category.value }}</option>
                             {% endfor %}

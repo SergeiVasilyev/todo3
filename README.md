@@ -24,5 +24,4 @@ b) koko luokan poistaminen sisäkkäisillä tehtävillä
 c) tee editointitoiminnon sisällä avattava luettelo, jossa on olemassa olevat luokat ja mahdollisuus lisätä uusi
 d) lisää näytölle toinen kenttä, jossa on kansioita ja mahdollisuus näyttää kaikki muistiinpanot 
 
-viiteavain
-[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=SergeiVasilyev)](https://github.com/anuraghazra/github-readme-stats)
+
